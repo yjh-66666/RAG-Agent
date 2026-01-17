@@ -1,0 +1,196 @@
+【面试讲稿（后端工程向）】企业级 RAG + Agent + API（最终版3.py）
+
+====================
+0. 一句话简介（开场）
+====================
+我做了一个“企业知识库 RAG + Agent”的后端服务：支持 PDF/DOCX/TXT 文档入库、向量检索、RAG 问答与 Agent 工具路由；同时补齐企业落地关键能力：JWT 鉴权（身份不可伪造）、角色/部门权限过滤、审计日志、Prometheus 指标与基础安全护栏。对外通过 FastAPI 提供 /docs 与标准接口。
+
+
+====================
+1) 30 秒电梯版（背诵版）
+====================
+这个项目是企业内部知识库问答服务。我用 LangChain 做文档加载与切分，用 Chroma/FAISS 存向量，提供 /ingest 入库、/search 检索、/query RAG 问答和 /agent_chat 交互接口。工程上我用 JWT + Depends 注入身份，roles/department 从 token 解析，检索阶段对 access_control 和 department 做二次过滤，避免越权；同时落审计日志并通过 /metrics 输出 Prometheus 指标，保证可追责与可观测。
+
+
+====================
+2) 2 分钟标准版（面试最常用）
+====================
+【背景】企业文档分散、更新频繁且有权限隔离需求。普通 RAG demo 往往忽略鉴权、权限、审计与可观测，无法上线。
+
+【我做的能力】
+- 入库 /ingest：支持目录或文件路径，解析 PDF/DOCX/TXT，计算 file_hash/last_modified 等元信息，切 chunk 并写入向量库（Chroma 默认；可切 FAISS）。
+- 检索 /search：向量召回后进行权限过滤（public 或 role 交集），再按 department 过滤；并引入 freshness 重排减少过期制度误答。
+- 问答 /query：检索 top-k 后构造上下文 prompt，约束“仅基于上下文回答+引用标记”，输出 answer + sources。
+- Agent /agent_chat：轻量 intent routing（search/doc_info/rag_answer）+ Guardrails（提示注入/敏感信息）+ 审计。
+
+【后端工程化】
+- JWT 鉴权：/auth/dev_login（演示用）签发 token；真实请求从 Authorization: Bearer <token> 解析 sub/roles/department，杜绝 body 伪造身份。
+- 审计：audit_logs.jsonl 记录 ingestion/search/agent 行为。
+- 可观测：Prometheus counter/histogram 记录耗时与成功率，/metrics 暴露。
+
+
+====================
+3) 5 分钟深挖版（面试官追问时展开）
+====================
+3.1 模块划分（单文件但分层清晰）
+- RAGConfig：配置（鉴权、向量库、chunk、并发、LLM/Embedding provider）
+- DocumentProcessor：路径展开、hash、加载器、metadata enrich、chunk split
+- VectorStoreManager：Chroma/FAISS build/load/add/search 封装
+- EnterpriseRAGSystem：ingest/search/rag_answer；权限过滤与审计落点
+- RAGAgent：意图路由 + 工具调用 + guardrails + 审计
+- FastAPI：统一身份 Depends、API 输出结构、/docs、/metrics
+
+3.2 关键链路（端到端）
+(1) /ingest
+- expand_paths -> load_and_process_documents（并发） -> split_documents -> vectorstore.build_or_load -> 保存 metadata_db + audit
+(2) /search
+- similarity_search_with_score(top 3k) -> 按 access_control(roles) + department 过滤 -> freshness_score 计算/融合排序 -> top-k 返回
+(3) /query
+- search top-k -> rag_answer(严格 prompt) -> 返回 answer + sources(document_id/source_file)
+(4) /agent_chat
+- API 层注入 user/roles（来自 JWT）-> guardrail 检查 -> intent routing -> 调用 search/doc_info/rag_answer
+
+3.3 权限模型（企业最关键点，建议重点讲）
+- 文档侧：access_control（public 或角色列表）+ department
+- 用户侧：JWT claims 里的 roles/department
+- 机制：向量召回后“二次过滤”，保证不可见内容不会被返回、更不会进入 LLM 上下文。
+
+3.4 向量库选型（回答 C：两者都讲，默认 Chroma）
+- 默认 Chroma：
+  - 优点：持久化方便、带 metadata、（通常）更适合做过滤/删除/可维护的企业知识库
+  - 缺点：性能/规模到一定量需要优化与分片
+- 可切 FAISS：
+  - 优点：高性能、部署简单
+  - 缺点：治理难（删除/更新/过滤更麻烦），更适合“离线构建+整体重建索引”模式
+- 取舍：面试版默认 Chroma，强调“可维护性+权限/元数据过滤”；FAISS 作为高性能备选。
+
+3.5 安全与稳定性
+- JWT：身份不从 body 来，避免越权伪造；roles 从 token 下发
+- Guardrails：拦截提示注入与疑似密钥泄露模式（基础版）
+- 错误结构：ok/fail 统一响应结构，便于前端与调用方处理
+
+
+====================
+4) 现场演示脚本（建议提前彩排）
+====================
+0) 启动服务
+- python zhi_liao_knowledge_assistant/最终版3.py
+- 打开 http://127.0.0.1:8000/docs
+
+1) 获取 token（演示身份 alice: roles=[hr,admin], department=hr）
+curl -X POST http://127.0.0.1:8000/auth/dev_login \
+  -H "Content-Type: application/json" \
+  -d '{"user":"alice","roles":["hr","admin"],"department":"hr"}'
+
+把返回的 data.access_token 保存到 TOKEN
+
+2) 入库
+TOKEN="<替换成上一步token>"
+curl -X POST http://127.0.0.1:8000/ingest \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"paths":["./demo_docs"],"department":"hr","access_control":["hr"]}'
+
+3) 检索
+curl -X POST http://127.0.0.1:8000/search \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"query":"年假怎么计算？","k":3,"department":"hr"}'
+
+4) 问答
+curl -X POST http://127.0.0.1:8000/query \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"question":"年假怎么计算？","department":"hr"}'
+
+5) Agent
+curl -X POST http://127.0.0.1:8000/agent_chat \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -d '{"message":"帮我总结年假政策并给出出处","department":"hr"}'
+
+
+====================
+5) 高频面试问题（后端工程向）+ 标准答案
+====================
+
+--- A. 系统设计 / 架构 ---
+Q1：你这个系统的核心组件是什么？
+A：核心分为摄入（DocumentProcessor）、存储（VectorStoreManager）、业务编排（EnterpriseRAGSystem）、交互层（RAGAgent）和服务层（FastAPI）。数据流是 ingest 写向量库与 metadata_db，search/query/agent 在检索后做权限过滤并可观测与审计。
+
+Q2：为什么做成 FastAPI 服务？
+A：企业里通常需要作为“内部能力服务”被前端/其他系统调用；FastAPI 有类型校验、自动 OpenAPI 文档，便于集成与联调。
+
+Q3：为什么单文件？线上能用吗？
+A：面试版单文件是为了可展示与可复现；模块边界已经清晰，工程化拆分时可以按 Processor/Store/RAG/Agent/API 拆包，不改变核心逻辑。
+
+
+--- B. 鉴权与权限（最容易加分） ---
+Q4：你怎么保证用户身份不可伪造？
+A：所有业务接口都通过 Depends(get_identity) 从 Authorization: Bearer JWT 解析 user/roles/department，客户端请求体不再传 user/roles；并校验 token 签名与 exp 过期。
+
+Q5：为什么还需要二次权限过滤？
+A：向量召回是“相似度”层面的召回，不代表有权限。即使向量库返回了片段，也必须在服务端按 access_control/department 过滤，确保不可见内容不会出现在响应、更不会进入 LLM prompt。
+
+Q6：如果要接公司 SSO 怎么做？
+A：/auth/dev_login 是演示用，生产应由网关/SSO 签发 JWT（或 OAuth2），服务端仅做验签与 claims 解析；也可用 JWKS(kid) 轮转密钥。
+
+
+--- C. 向量库与存储治理（后端常问） ---
+Q7：为什么默认 Chroma？FAISS 什么时候用？
+A：默认 Chroma 因为持久化与元数据管理更友好，更适合企业知识库（权限、过滤、维护）。FAISS 更适合追求极致性能、且可以接受“整体重建/离线构建”的场景。
+
+Q8：如何做删除/更新/增量入库？
+A：当前面试版重点是链路闭环与权限。生产要支持：文档 hash 去重、版本号管理、按 document_id 删除向量（Chroma 可按 metadata filter 删除；FAISS 可能采用重建索引/分段索引策略）。
+
+
+--- D. 性能与可观测（后端必问） ---
+Q9：系统瓶颈在哪里？
+A：入库阶段主要在文档解析与 embedding；查询阶段主要在向量检索与 LLM 生成。可以通过并发处理、缓存（embedding/检索结果）、异步 ingest、以及限制 top-k/上下文长度控制延迟与成本。
+
+Q10：你怎么监控与排障？
+A：用 Prometheus 输出请求延迟直方图与成功/失败计数，通过 endpoint/handler 维度观察热点与异常；并结合审计日志定位“哪个用户在什么时间触发了什么操作”。
+
+Q11：为什么 ok/fail 而不是全抛 HTTPException？
+A：业务层面希望响应结构稳定，前端/调用方统一处理。鉴权/参数错误仍可以用 HTTP status（401/403/422）；业务内部错误封装为 fail，方便兼容与观测。
+
+
+--- E. RAG 质量与防幻觉（会被问但不必做很深） ---
+Q12：你怎么减少幻觉？
+A：prompt 约束“仅基于上下文回答，不要编造”，并且强制引用标记；更关键的是确保上下文来自权限过滤后的 docs。进一步可以做：引用句子对齐、答案与证据一致性校验、LLM-as-judge 评测。
+
+Q13：freshness 重排有什么作用？
+A：企业制度类文档容易更新，单纯相似度可能命中旧版；freshness 根据 last_modified 计算新鲜度，在排序中提高新文档权重，降低过期误答风险。
+
+
+--- F. 安全（后端加分） ---
+Q14：Prompt injection 你怎么处理？
+A：目前做了基础 guardrail（关键词/模式拦截），并且核心是“权限不绕过”：不可见内容不进 prompt。生产可升级：更严格的策略、对工具调用做 allowlist、对输出做敏感信息扫描与脱敏。
+
+Q15：如何避免把密钥泄露给模型或日志？
+A：密钥从环境变量读取，不写入 prompt；日志中避免打印 token/密钥。输出前可加敏感信息扫描。
+
+
+====================
+6) 你可以主动讲的“工程取舍”（显成熟）
+====================
+- 我优先做“可信身份 + 权限闭环 + 可观测/审计”，因为企业内部知识库的核心风险是越权与不可追责。
+- 异步 ingest、删除/更新、离线评测属于下一阶段工程化，可按业务量与合规需求逐步演进。
+
+
+====================
+7) 反问面试官（后端工程实习常用）
+====================
+- 贵司的 RAG 服务更偏“内部平台”还是“直接面向业务产品”？调用量级大概是多少？
+- 你们的鉴权体系是网关统一下发 JWT，还是服务内部做 OAuth2？
+- 你们对知识库的权限模型（RBAC/ABAC）更复杂吗？例如按项目/组织/人群？
+- 你们目前如何做 RAG 的离线评测与线上监控（命中率、引用质量）？
+
+
+====================
+8) 配置提示（写在这里方便你记）
+====================
+- .env 里建议配置：
+  OPENAI_API_KEY=...
+  AUTH_MODE=jwt
+  JWT_SECRET=...（演示也请改成随机字符串）
+  JWT_EXP_MINUTES=1440
+  LLM_PROVIDER=openai 或 huggingface
+
+备注：/auth/dev_login 仅用于面试演示，生产应对接 SSO/网关。

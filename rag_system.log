@@ -1,0 +1,205 @@
+[2026-01-12 16:04:27,241] [INFO] __main__ - ============================================================
+[2026-01-12 16:04:27,242] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-12 16:04:27,242] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型
+[2026-01-12 16:04:27,242] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-12 16:04:27,242] [INFO] __main__ - ============================================================
+[2026-01-12 16:04:27,242] [WARNING] __main__ - 未找到模型缓存，将尝试直接加载...
+[2026-01-12 16:04:27,242] [WARNING] __main__ - 本地模型不存在，将尝试从名称加载
+[2026-01-12 16:04:27,245] [INFO] sentence_transformers.SentenceTransformer - Load pretrained SentenceTransformer: BAAI/bge-small-zh-v1.5
+[2026-01-12 16:04:27,557] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: fe98a4c8-5bed-446b-a27b-4958b6f7ce96)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:04:27,558] [WARNING] huggingface_hub.utils._http - Retrying in 1s [Retry 1/5].
+[2026-01-12 16:04:28,864] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 678f229d-322a-4d23-97fa-9a9d65cd8868)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:04:28,864] [WARNING] huggingface_hub.utils._http - Retrying in 2s [Retry 2/5].
+[2026-01-12 16:04:31,141] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 16808615-f47e-4ee0-b58f-70332fd7c6ab)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:04:31,141] [WARNING] huggingface_hub.utils._http - Retrying in 4s [Retry 3/5].
+[2026-01-12 16:04:35,436] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 0212c931-b859-413f-a8ac-5f1a44965435)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:04:35,436] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 4/5].
+[2026-01-12 16:04:43,718] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 6a46993c-5528-4823-9294-875c3c359e0c)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:04:43,718] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 5/5].
+[2026-01-12 16:04:51,999] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: a547b3cb-d2bc-4997-a006-915ce9d2e105)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:04:51,999] [WARNING] sentence_transformers.SentenceTransformer - No sentence-transformers model found with name BAAI/bge-small-zh-v1.5. Creating a new one with mean pooling.
+[2026-01-12 16:04:52,262] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 0bbdb318-fece-439a-988d-5a469a6ca5d7)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:04:52,262] [WARNING] huggingface_hub.utils._http - Retrying in 1s [Retry 1/5].
+[2026-01-12 16:04:53,612] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 1f7634c8-91b4-4635-8825-cdfcdf330121)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:04:53,612] [WARNING] huggingface_hub.utils._http - Retrying in 2s [Retry 2/5].
+[2026-01-12 16:04:55,970] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: a7f0c46e-016d-4cc0-a04d-2889231ec5ce)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:04:55,971] [WARNING] huggingface_hub.utils._http - Retrying in 4s [Retry 3/5].
+[2026-01-12 16:05:00,354] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 3fa251b4-3ec3-4a15-a554-c8737a117d24)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:05:00,354] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 4/5].
+[2026-01-12 16:05:08,771] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 90a8a521-8c22-4e13-872f-e59ec6cf5715)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:05:08,771] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 5/5].
+[2026-01-12 16:05:17,132] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 6f47bad6-b46b-48b3-b6f7-40820a70abf4)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:05:17,134] [ERROR] __main__ - 加载 Embedding 模型失败: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 6f47bad6-b46b-48b3-b6f7-40820a70abf4)')
+[2026-01-12 16:05:17,134] [ERROR] __main__ - 请检查模型文件是否存在
+[2026-01-12 16:05:17,134] [ERROR] __main__ - 启动失败: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 6f47bad6-b46b-48b3-b6f7-40820a70abf4)')
+[2026-01-12 16:05:17,134] [ERROR] __main__ - 
+建议先运行设置命令:
+[2026-01-12 16:05:17,134] [ERROR] __main__ - python rag_system.py setup
+[2026-01-12 16:05:17,134] [ERROR] __main__ - 
+然后安装依赖:
+[2026-01-12 16:05:17,134] [ERROR] __main__ - pip install -r requirements.txt
+[2026-01-12 16:07:08,280] [INFO] __main__ - ============================================================
+[2026-01-12 16:07:08,281] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-12 16:07:08,281] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型
+[2026-01-12 16:07:08,281] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-12 16:07:08,281] [INFO] __main__ - ============================================================
+[2026-01-12 16:07:08,281] [WARNING] __main__ - 未找到模型缓存，将尝试直接加载...
+[2026-01-12 16:07:08,281] [WARNING] __main__ - 本地模型不存在，将尝试从名称加载
+[2026-01-12 16:07:08,283] [INFO] sentence_transformers.SentenceTransformer - Load pretrained SentenceTransformer: BAAI/bge-small-zh-v1.5
+[2026-01-12 16:07:08,554] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: ce3cd6dc-dea9-43de-8826-e9cf2f13d89c)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:07:08,554] [WARNING] huggingface_hub.utils._http - Retrying in 1s [Retry 1/5].
+[2026-01-12 16:07:09,843] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 0a8345c8-3554-45b8-847a-edfa22887a82)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:07:09,843] [WARNING] huggingface_hub.utils._http - Retrying in 2s [Retry 2/5].
+[2026-01-12 16:07:12,203] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 91f6fbac-f0cc-4c72-933c-c1398c2c2155)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:07:12,203] [WARNING] huggingface_hub.utils._http - Retrying in 4s [Retry 3/5].
+[2026-01-12 16:07:16,570] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: d16063d0-4971-4f70-b694-513d908fbba7)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:07:16,570] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 4/5].
+[2026-01-12 16:07:24,933] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 0b15dcb7-b087-44b8-8cb4-5a5788964ca2)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:07:24,934] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 5/5].
+[2026-01-12 16:07:33,303] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 1dce0254-870c-4e9c-85dd-d4494221e8c7)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:07:33,303] [WARNING] sentence_transformers.SentenceTransformer - No sentence-transformers model found with name BAAI/bge-small-zh-v1.5. Creating a new one with mean pooling.
+[2026-01-12 16:07:33,647] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: a923e073-dc20-449a-bd14-d88bf18fcd02)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:07:33,647] [WARNING] huggingface_hub.utils._http - Retrying in 1s [Retry 1/5].
+[2026-01-12 16:07:34,995] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: e05ddfe4-da21-49e2-918f-824692c83b00)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:07:34,995] [WARNING] huggingface_hub.utils._http - Retrying in 2s [Retry 2/5].
+[2026-01-12 16:07:37,346] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 16566a34-a7c8-479e-8cc9-df573f08e133)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:07:37,346] [WARNING] huggingface_hub.utils._http - Retrying in 4s [Retry 3/5].
+[2026-01-12 16:07:41,699] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 99ac799c-0f2d-4eca-9f28-350e306d7ad5)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:07:41,699] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 4/5].
+[2026-01-12 16:07:50,058] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 6350a4c0-b7d8-4a2c-bc34-9fdca660f03d)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:07:50,058] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 5/5].
+[2026-01-12 16:07:58,324] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 72a25a16-11e1-4009-9681-1bbfb444f859)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json
+[2026-01-12 16:07:58,324] [ERROR] __main__ - 加载 Embedding 模型失败: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 72a25a16-11e1-4009-9681-1bbfb444f859)')
+[2026-01-12 16:07:58,324] [ERROR] __main__ - 请检查模型文件是否存在
+[2026-01-12 16:07:58,324] [ERROR] __main__ - 启动失败: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/adapter_config.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 72a25a16-11e1-4009-9681-1bbfb444f859)')
+[2026-01-12 16:07:58,324] [ERROR] __main__ - 
+建议先运行设置命令:
+[2026-01-12 16:07:58,324] [ERROR] __main__ - python rag_system.py setup
+[2026-01-12 16:07:58,324] [ERROR] __main__ - 
+然后安装依赖:
+[2026-01-12 16:07:58,324] [ERROR] __main__ - pip install -r requirements.txt
+[2026-01-12 16:16:40,394] [INFO] __main__ - ============================================================
+[2026-01-12 16:16:40,394] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-12 16:16:40,395] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型
+[2026-01-12 16:16:40,395] [INFO] __main__ - 模型路径: C:\\Users\\yang\\.cache\\modelscope\\hub\\models\\BAAI\\bge-small-zh-v1.5
+[2026-01-12 16:16:40,395] [INFO] __main__ - ============================================================
+[2026-01-12 16:16:40,395] [WARNING] __main__ - 未找到模型缓存，将尝试直接加载...
+[2026-01-12 16:16:40,395] [WARNING] __main__ - 本地模型不存在，将尝试从名称加载
+[2026-01-12 16:16:40,397] [INFO] sentence_transformers.SentenceTransformer - Load pretrained SentenceTransformer: BAAI/bge-small-zh-v1.5
+[2026-01-12 16:16:40,687] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 7b4b15f1-2bfb-4111-bb28-c4ad529da436)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:16:40,687] [WARNING] huggingface_hub.utils._http - Retrying in 1s [Retry 1/5].
+[2026-01-12 16:16:41,965] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 5eb249cb-0237-4a22-acce-53535f9cd9c4)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:16:41,965] [WARNING] huggingface_hub.utils._http - Retrying in 2s [Retry 2/5].
+[2026-01-12 16:16:44,251] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: 5178f218-2ba9-4fed-9c54-1ed07672129e)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:16:44,252] [WARNING] huggingface_hub.utils._http - Retrying in 4s [Retry 3/5].
+[2026-01-12 16:16:48,529] [WARNING] huggingface_hub.utils._http - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /BAAI/bge-small-zh-v1.5/resolve/main/modules.json (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1017)')))"), '(Request ID: bafcc852-d198-45a8-8e6d-d17edc7c8c95)')' thrown while requesting HEAD https://huggingface.co/BAAI/bge-small-zh-v1.5/resolve/main/./modules.json
+[2026-01-12 16:16:48,529] [WARNING] huggingface_hub.utils._http - Retrying in 8s [Retry 4/5].
+[2026-01-12 17:35:43,796] [INFO] __main__ - ============================================================
+[2026-01-12 17:35:43,796] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-12 17:35:43,796] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-12 17:35:43,796] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-12 17:35:43,796] [INFO] __main__ - ============================================================
+[2026-01-12 17:35:43,798] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-12 17:35:43,798] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-12 17:35:43,799] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-12 20:51:03,771] [INFO] __main__ - ============================================================
+[2026-01-12 20:51:03,771] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-12 20:51:03,771] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-12 20:51:03,772] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-12 20:51:03,772] [INFO] __main__ - ============================================================
+[2026-01-12 20:51:03,774] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-12 20:51:03,774] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-12 20:51:03,775] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-12 22:52:11,178] [INFO] __main__ - ============================================================
+[2026-01-12 22:52:11,178] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-12 22:52:11,178] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-12 22:52:11,179] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-12 22:52:11,179] [INFO] __main__ - ============================================================
+[2026-01-12 22:52:11,180] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-12 22:52:11,180] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-12 22:52:11,181] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-12 23:23:31,007] [INFO] __main__ - ============================================================
+[2026-01-12 23:23:31,007] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-12 23:23:31,007] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-12 23:23:31,007] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-12 23:23:31,007] [INFO] __main__ - ============================================================
+[2026-01-12 23:23:31,009] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-12 23:23:31,009] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-12 23:23:31,010] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-13 00:45:40,585] [INFO] __main__ - ============================================================
+[2026-01-13 00:45:40,585] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-13 00:45:40,585] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-13 00:45:40,585] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-13 00:45:40,585] [INFO] __main__ - ============================================================
+[2026-01-13 00:45:40,587] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-13 00:45:40,587] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-13 00:45:40,587] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-13 00:48:24,925] [INFO] __main__ - ✓ 已初始化 DeepSeek LLM: deepseek-chat
+[2026-01-13 00:48:26,980] [INFO] __main__ - ✓ 成功加载: IT制度_账号与权限.txt (1 个块)
+[2026-01-13 00:48:26,981] [INFO] __main__ - ✓ 成功加载: 人事制度_年假政策.txt (1 个块)
+[2026-01-13 00:48:26,981] [INFO] __main__ - ✓ 成功加载: 安全规范_敏感信息处理.txt (1 个块)
+[2026-01-13 00:48:26,981] [INFO] __main__ - ✓ 成功加载: 研发规范_代码评审.txt (1 个块)
+[2026-01-13 00:48:26,982] [INFO] __main__ - ✓ 成功加载: 财务制度_报销流程.txt (1 个块)
+[2026-01-13 00:48:27,642] [INFO] chromadb.telemetry.product.posthog - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[2026-01-13 00:48:27,973] [INFO] __main__ - ✓ 向量数据库已就绪 (类型: chroma)
+[2026-01-13 00:48:34,205] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 00:48:38,666] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 00:48:42,915] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 11:35:02,052] [INFO] __main__ - ============================================================
+[2026-01-13 11:35:02,052] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-13 11:35:02,052] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-13 11:35:02,052] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-13 11:35:02,052] [INFO] __main__ - ============================================================
+[2026-01-13 11:35:02,054] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-13 11:35:02,054] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-13 11:35:02,055] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-13 11:35:51,748] [INFO] __main__ - ✓ 已初始化 DeepSeek LLM: deepseek-chat
+[2026-01-13 11:35:53,801] [INFO] __main__ - ✓ 成功加载: IT制度_账号与权限.txt (1 个块)
+[2026-01-13 11:35:53,801] [INFO] __main__ - ✓ 成功加载: 人事制度_年假政策.txt (1 个块)
+[2026-01-13 11:35:53,802] [INFO] __main__ - ✓ 成功加载: 研发规范_代码评审.txt (1 个块)
+[2026-01-13 11:35:53,802] [INFO] __main__ - ✓ 成功加载: 安全规范_敏感信息处理.txt (1 个块)
+[2026-01-13 11:35:53,802] [INFO] __main__ - ✓ 成功加载: 财务制度_报销流程.txt (1 个块)
+[2026-01-13 11:35:54,440] [INFO] chromadb.telemetry.product.posthog - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[2026-01-13 11:35:54,712] [INFO] __main__ - ✓ 向量数据库已就绪 (类型: chroma)
+[2026-01-13 11:36:00,981] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 11:36:04,628] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 11:36:08,062] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 11:36:14,797] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 11:36:19,486] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 14:38:33,224] [INFO] __main__ - ============================================================
+[2026-01-13 14:38:33,224] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-13 14:38:33,224] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-13 14:38:33,224] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-13 14:38:33,224] [INFO] __main__ - ============================================================
+[2026-01-13 14:38:33,240] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-13 14:38:33,240] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-13 14:38:33,240] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-13 14:41:48,505] [INFO] __main__ - ============================================================
+[2026-01-13 14:41:48,505] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-13 14:41:48,505] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-13 14:41:48,505] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-13 14:41:48,505] [INFO] __main__ - ============================================================
+[2026-01-13 14:41:48,505] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-13 14:41:48,505] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-13 14:41:48,505] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
+[2026-01-13 14:48:32,460] [WARNING] __main__ - 在指定路径下未找到任何支持的文件。
+[2026-01-13 14:51:38,990] [WARNING] __main__ - 在指定路径下未找到任何支持的文件。
+[2026-01-13 14:54:03,024] [INFO] __main__ - ✓ 成功加载: IT制度_账号与权限.txt (1 个块)
+[2026-01-13 14:54:03,024] [INFO] __main__ - ✓ 成功加载: 人事制度_年假政策.txt (1 个块)
+[2026-01-13 14:54:03,025] [INFO] __main__ - ✓ 成功加载: 安全规范_敏感信息处理.txt (1 个块)
+[2026-01-13 14:54:03,025] [INFO] __main__ - ✓ 成功加载: 研发规范_代码评审.txt (1 个块)
+[2026-01-13 14:54:03,025] [INFO] __main__ - ✓ 成功加载: 财务制度_报销流程.txt (1 个块)
+[2026-01-13 14:54:03,658] [INFO] chromadb.telemetry.product.posthog - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[2026-01-13 14:54:03,866] [INFO] __main__ - ✓ 向量数据库已就绪 (类型: chroma)
+[2026-01-13 14:58:59,836] [INFO] backoff - Backing off send_request(...) for 0.6s (requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Read timed out. (read timeout=15))
+[2026-01-13 14:59:19,991] [INFO] __main__ - ✓ 已初始化 DeepSeek LLM: deepseek-chat
+[2026-01-13 14:59:20,172] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 15:05:52,544] [INFO] httpx - HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-01-13 18:22:36,112] [INFO] __main__ - ============================================================
+[2026-01-13 18:22:36,112] [INFO] __main__ - 企业级 RAG 系统初始化中...
+[2026-01-13 18:22:36,112] [INFO] __main__ - 配置: LLM=DeepSeek, Embedding=本地BGE模型（离线模式）
+[2026-01-13 18:22:36,112] [INFO] __main__ - 模型路径: ./models/bge-small-zh-v1.5
+[2026-01-13 18:22:36,112] [INFO] __main__ - ============================================================
+[2026-01-13 18:22:36,114] [INFO] __main__ - 未找到模型文件，使用轻量级模型
+[2026-01-13 18:22:36,114] [INFO] __main__ - 使用轻量级嵌入模型（离线模式）
+[2026-01-13 18:22:36,114] [INFO] __main__ - ✓ Embedding 初始化成功，向量维度: 384
