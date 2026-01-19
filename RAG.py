@@ -1,16 +1,4 @@
-"""企业级 RAG + Agent + API（单文件版 - 离线优化版）
-
-说明：此版本已优化为完全离线运行：
-- LLM：使用 DeepSeek API（网络）
-- Embedding：使用本地 BGE 模型（完全离线）
-- 自动处理模型拷贝和降级
-
-快速开始：
-1) 安装依赖：pip install -r requirements.txt
-2) 配置 .env：修改 OPENAI_API_KEY
-3) 运行：python RAGplus.py
-4) 访问：http://127.0.0.1:8000/docs
-"""
+""" RAG + Agent + API（单文件版 - 离线优化版）
 
 from __future__ import annotations
 
